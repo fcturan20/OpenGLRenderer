@@ -173,7 +173,7 @@ void mouse_position_callback(GLFWwindow* window, double xpos, double ypos) {
 
 
 void create_Window() {
-	//GLFW'yi baþlatma kodlarý
+	//GLFW'yi baï¿½latma kodlarï¿½
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);

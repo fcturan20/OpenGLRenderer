@@ -37,7 +37,6 @@ using namespace Assimp;
 
 bool NormalMapping = false;
 
-
 int main()
 {
 	//Create and Allocate Resources to Create Window
@@ -157,7 +156,7 @@ int main()
 	//Point Light Object
 	vec3 light0_Position(0, 3, 0);
 	vec3 light0_Color(0, 1, 0);
-	Light_Object light_sphere0 = Import_Light(Import("C:/Users/furka/Desktop/Çalýþmalar/Modeller/Base Shapes/Cube.obj", Light_1, false), Light_1, "Point");
+	Light_Object light_sphere0 = Import_Light(Import("C:/Users/furka/Desktop/ï¿½alï¿½ï¿½malar/Modeller/Base Shapes/Cube.obj", Light_1, false), Light_1, "Point");
 	base_Light properties0{ light0_Color, 1, 0.009f, 0.032f, uint(1) };
 	light_sphere0.set_Light_Properties(properties0, vec3(0), 0);
 	light_sphere0.Transform(vec3(1), vec3(1, 1, 1), 0.0f, light0_Position);
@@ -166,7 +165,7 @@ int main()
 	//Directional Light
 	vec3 Directional_Pos(0, 100, 0);
 	vec3 Directional_Color(1, 0, 0);
-	Light_Object Directional_Light = Import_Light(Import("C:/Users/furka/Desktop/Çalýþmalar/Modeller/Base Shapes/Cube.obj", Light_1, false), Light_1, "Directional");
+	Light_Object Directional_Light = Import_Light(Import("C:/Users/furka/Desktop/ï¿½alï¿½ï¿½malar/Modeller/Base Shapes/Cube.obj", Light_1, false), Light_1, "Directional");
 	base_Light directional_properties{ Directional_Color, 1, 0.000009f, 0.0000032f, uint(1) };
 	Directional_Light.set_Light_Properties(directional_properties, vec3(0, 1, 0), 0);
 
@@ -174,7 +173,7 @@ int main()
 	//Spot Light
 	vec3 Spot_Pos(0, 3, 1);
 	vec3 Spot_Color(0, 0, 1);
-	Light_Object Spot_Light = Import_Light(Import("C:/Users/furka/Desktop/Çalýþmalar/Modeller/Base Shapes/Cube.obj", Light_1, false), Light_1, "Spot");
+	Light_Object Spot_Light = Import_Light(Import("C:/Users/furka/Desktop/ï¿½alï¿½ï¿½malar/Modeller/Base Shapes/Cube.obj", Light_1, false), Light_1, "Spot");
 	base_Light Spot_properties{ Spot_Color, 1, 0.000009f, 0.000032f, uint(1) };
 	Spot_Light.set_Light_Properties(Spot_properties, vec3(0, 1, 0), 45, 50);
 	light_sphere0.Transform(vec3(1), vec3(1, 1, 1), 0.0f, Spot_Pos);
@@ -185,7 +184,7 @@ int main()
 	//Sponza
 	mat4 Sponza_world_transform;
 	Sponza_world_transform = scale(Sponza_world_transform, vec3(0.2f));
-	Mesh_Object Sponza = Import_Mesh(Import("C:/Users/furka/Desktop/Çalýþmalar/Modeller/Sponza Scene/sponza.obj", Main_Shader, RGB_texture, false), Main_Shader);
+	Mesh_Object Sponza = Import_Mesh(Import("C:/Users/furka/Desktop/ï¿½alï¿½ï¿½malar/Modeller/Sponza Scene/sponza.obj", Main_Shader, RGB_texture, false), Main_Shader);
 	Sponza.set_World_Transform(Sponza_world_transform);
 	Sponza.set_TextCoord_Sampler(1);
 	Sponza.set_Material_Specs(Gold_Material2);*/
@@ -195,7 +194,7 @@ int main()
 	//Nanosuit
 	mat4 Nanosuit_world_transform;
 	Nanosuit_world_transform = scale(Nanosuit_world_transform, vec3(0.5f));
-	Mesh_Object Nanosuit = Import_Mesh(Import("C:/Users/furka/Desktop/Çalýþmalar/Modeller/Nanosuit/nanosuit.obj", Surface_Shader_Main, RGB_texture, false), Surface_Shader_Main);
+	Mesh_Object Nanosuit = Import_Mesh(Import("C:/Users/furka/Desktop/ï¿½alï¿½ï¿½malar/Modeller/Nanosuit/nanosuit.obj", Surface_Shader_Main, RGB_texture, false), Surface_Shader_Main);
 	Nanosuit.set_World_Transform(Nanosuit_world_transform);
 	Nanosuit.set_TextCoord_Sampler(1);
 	Nanosuit.set_Material_Specs(Gold_Material2);
