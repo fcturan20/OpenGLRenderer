@@ -1,0 +1,16 @@
+1) 3 types of light support; Spot, Point and Directional.
+2) Setting the Texture Object Properties with Functions (All in one-time or seperate times).
+3) You can import Objects and Textures in one line. Both of them needs Physical Drive locations ($(SolutionDir) like shortcuts are not supported). You should set Texture Properties to import a Texture (Wrapping and MipMap is supported but not tried). 
+4) Blinn-Phong Normal Map Shading (If you use NormalMap_Shader). 
+5) Gamma Correction (If you activate last few lines in Render Loop).
+6) One-Line CubeMap creation.
+7) One-Line View and Projection Matrix change on Meshes.
+8) Mesh Stencil Settings (OpenGL3.3 Post Process doesn't support to render a Stencil Buffer Texture) (Doesn't provide Stencil to Post Process like UE4 did).
+9) Multiple textures per Mesh is supported as an abstraction (You need to create a shader for it). Multiple Albedo textures or Normal textures. They will be named like "texture_color0", "texture_color1" etc.
+10) Each Mesh supports Matrix changes. You can use it for easily draw meshes at seperate buffers/passes. Not a optimized way, Matrix Change Count = Every Frame * Pass change * Mesh count.
+11) World is Y-Up.
+12) Attenuation is supported in Shader Code. Only you have to do is change 2-3 line of code in Shader (like "result *= Attenuation").
+13) Framebuffer abstraction is supported. You can set ready Render Targets to Framebuffer or create specific ones for the Framebuffer as your specific Render Target properties. You can activate in one line. You can check errors in one line. You can "=" between Framebuffers (All buffers and settings will be changed).
+14) In Window Mode, as you changed the size of window it will change all Framebuffers if you call "Framebuffer_Class.update_Viewport(Main_WindowViewport);" each frame.
+15) Render Target Texture abstraction is supported. You can create Textures that you can render on with Texture Properties. You should set Texture Properties because MipMap creation and Wrapping is supported (but not tried). Resolution of Texture is in Texture Properties struct. 
+Note: That's all I find in my code. I'm making this list 6 months after ended developing. I added Framebuffer and Render Target now because they were written

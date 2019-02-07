@@ -1,0 +1,21 @@
+﻿  Main.cpp
+c:\users\furka\desktop\çalışmalar\learning gl\opengl-renderer\opengl-renderer\functional header.h(6): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\furka\desktop\çalışmalar\learning gl\opengl-renderer\opengl-renderer\functional header.h(151): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\furka\desktop\çalışmalar\learning gl\opengl-renderer\opengl-renderer\functional header.h(152): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\furka\desktop\çalışmalar\learning gl\opengl-renderer\opengl-renderer\functional header.h(154): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\furka\desktop\çalışmalar\learning gl\opengl-renderer\opengl-renderer\functional header.h(155): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\furka\desktop\çalışmalar\learning gl\opengl-renderer\opengl-renderer\functional header.h(156): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\furka\desktop\çalışmalar\learning gl\opengl-renderer\opengl-renderer\functional header.h(157): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\furka\desktop\çalışmalar\learning gl\opengl-renderer\opengl-renderer\functional header.h(249): warning C4553: '==': result of expression not used; did you intend '='?
+c:\users\furka\desktop\çalışmalar\learning gl\opengl-renderer\opengl-renderer\light object class.h(232): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\furka\desktop\çalışmalar\learning gl\opengl-renderer\opengl-renderer\light object class.h(233): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\users\furka\desktop\çalışmalar\learning gl\opengl-renderer\opengl-renderer\main.cpp(207): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  OpenGL-Renderer.vcxproj -> C:\Users\furka\Desktop\Çalışmalar\Learning GL\OpenGL-Renderer\Debug\OpenGL-Renderer.exe
