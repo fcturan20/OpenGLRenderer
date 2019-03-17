@@ -37,6 +37,7 @@ using namespace Assimp;
 
 bool NormalMapping = false;
 
+
 int main()
 {
 	//Create and Allocate Resources to Create Window
@@ -156,16 +157,16 @@ int main()
 	//Point Light Object
 	vec3 light0_Position(0, 3, 0);
 	vec3 light0_Color(0, 1, 0);
-	Light_Object light_sphere0 = Import_Light(Import("C:/Users/furka/Desktop/ï¿½alï¿½ï¿½malar/Modeller/Base Shapes/Cube.obj", Light_1, false), Light_1, "Point");
+	Light_Object light_sphere0 = Import_Light(Import("C:/Users/furka/Desktop/Çalýþmalar/Modeller/Base Shapes/Cube.obj", Light_1, false), Light_1, "Point");
 	base_Light properties0{ light0_Color, 1, 0.009f, 0.032f, uint(1) };
 	light_sphere0.set_Light_Properties(properties0, vec3(0), 0);
 	light_sphere0.Transform(vec3(1), vec3(1, 1, 1), 0.0f, light0_Position);
 
-
+	/*
 	//Directional Light
 	vec3 Directional_Pos(0, 100, 0);
 	vec3 Directional_Color(1, 0, 0);
-	Light_Object Directional_Light = Import_Light(Import("C:/Users/furka/Desktop/ï¿½alï¿½ï¿½malar/Modeller/Base Shapes/Cube.obj", Light_1, false), Light_1, "Directional");
+	Light_Object Directional_Light = Import_Light(Import("C:/Users/furka/Desktop/Çalýþmalar/Modeller/Base Shapes/Cube.obj", Light_1, false), Light_1, "Directional");
 	base_Light directional_properties{ Directional_Color, 1, 0.000009f, 0.0000032f, uint(1) };
 	Directional_Light.set_Light_Properties(directional_properties, vec3(0, 1, 0), 0);
 
@@ -173,10 +174,11 @@ int main()
 	//Spot Light
 	vec3 Spot_Pos(0, 3, 1);
 	vec3 Spot_Color(0, 0, 1);
-	Light_Object Spot_Light = Import_Light(Import("C:/Users/furka/Desktop/ï¿½alï¿½ï¿½malar/Modeller/Base Shapes/Cube.obj", Light_1, false), Light_1, "Spot");
+	Light_Object Spot_Light = Import_Light(Import("C:/Users/furka/Desktop/Çalýþmalar/Modeller/Base Shapes/Cube.obj", Light_1, false), Light_1, "Spot");
 	base_Light Spot_properties{ Spot_Color, 1, 0.000009f, 0.000032f, uint(1) };
 	Spot_Light.set_Light_Properties(Spot_properties, vec3(0, 1, 0), 45, 50);
 	light_sphere0.Transform(vec3(1), vec3(1, 1, 1), 0.0f, Spot_Pos);
+	*/
 
 
 	cout << "Lights are finished loading, Meshes are started\n";
@@ -184,7 +186,7 @@ int main()
 	//Sponza
 	mat4 Sponza_world_transform;
 	Sponza_world_transform = scale(Sponza_world_transform, vec3(0.2f));
-	Mesh_Object Sponza = Import_Mesh(Import("C:/Users/furka/Desktop/ï¿½alï¿½ï¿½malar/Modeller/Sponza Scene/sponza.obj", Main_Shader, RGB_texture, false), Main_Shader);
+	Mesh_Object Sponza = Import_Mesh(Import("C:/Users/furka/Desktop/Çalýþmalar/Modeller/Sponza Scene/sponza.obj", Main_Shader, RGB_texture, false), Main_Shader);
 	Sponza.set_World_Transform(Sponza_world_transform);
 	Sponza.set_TextCoord_Sampler(1);
 	Sponza.set_Material_Specs(Gold_Material2);*/
@@ -194,7 +196,7 @@ int main()
 	//Nanosuit
 	mat4 Nanosuit_world_transform;
 	Nanosuit_world_transform = scale(Nanosuit_world_transform, vec3(0.5f));
-	Mesh_Object Nanosuit = Import_Mesh(Import("C:/Users/furka/Desktop/ï¿½alï¿½ï¿½malar/Modeller/Nanosuit/nanosuit.obj", Surface_Shader_Main, RGB_texture, false), Surface_Shader_Main);
+	Mesh_Object Nanosuit = Import_Mesh(Import("C:/Users/furka/Desktop/Çalýþmalar/Modeller/Nanosuit/nanosuit.obj", Surface_Shader_Main, RGB_texture, false), Surface_Shader_Main);
 	Nanosuit.set_World_Transform(Nanosuit_world_transform);
 	Nanosuit.set_TextCoord_Sampler(1);
 	Nanosuit.set_Material_Specs(Gold_Material2);
@@ -216,104 +218,107 @@ int main()
 	//Render Loop
 	while (!glfwWindowShouldClose(window))
 	{
-		//Programmic Functions
-		Test_FaceCulling();
-		camera_Mode(main_Camera, firstMouse);
-		wireframe_Transition();													//Problem: Because FPS is too high, Function determines multiple touch on one touch
-		determine_RageQuit(window);
-		FPS_Calculator(lastframe, false);
-		set_LightUniform_Buffers(Surface_Shader_NormalMap);
-		set_LightUniform_Buffers(Surface_Shader_Main);
+		if (is_Window_Active)
+		{
+			//Programmic Functions
+			Test_FaceCulling();
+			camera_Mode(main_Camera, firstMouse);
+			wireframe_Transition();													//Problem: Because FPS is too high, Function determines multiple touch on one touch
+			determine_RageQuit(window);
+			FPS_Calculator(lastframe, false);
+			set_LightUniform_Buffers(Surface_Shader_NormalMap);
+			set_LightUniform_Buffers(Surface_Shader_Main);
 
-		Viewport Window_Viewport = get_WindowViewport();
-		cout << "Window Viewport:\n";
-		Window_Viewport.Log();
-		cout << endl;
-		MainRenderer_FB.update_Viewport(Window_Viewport);
-		Alternative_FB.update_Viewport(Window_Viewport);
+			Viewport Window_Viewport = get_WindowViewport();
+			MainRenderer_FB.update_Viewport(Window_Viewport);
+			Alternative_FB.update_Viewport(Window_Viewport);
 
-		/*
-		//Cube Map Pass
-		PlayerCubeMap_Capturing.Create_ViewMatrixes();
-		for (GLuint i = 0; i < 6; i++) {
-			PlayerCubeMap_Capturing.Enable_CM_FrameBuffer(i);
-
-			
-			Sponza.set_ProjMatrix(mat4(mat3(PlayerCubeMap_Capturing.faceframebuffer_viewmatrixes[i])));
-			Sponza.set_ViewMatrix(PlayerCubeMap_Capturing.faceframebuffer_viewmatrixes[i]);
-			Sponza.Draw();
-		}*/
+			/*
+			//Cube Map Pass
+			PlayerCubeMap_Capturing.Create_ViewMatrixes();
+			for (GLuint i = 0; i < 6; i++) {
+				PlayerCubeMap_Capturing.Enable_CM_FrameBuffer(i);
 
 
-		//Normal Scene Pass
-		glBindFramebuffer(GL_FRAMEBUFFER, MainRenderer_FB.id);
-
-		//Set Background
-		// ------
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); 
+				Sponza.set_ProjMatrix(mat4(mat3(PlayerCubeMap_Capturing.faceframebuffer_viewmatrixes[i])));
+				Sponza.set_ViewMatrix(PlayerCubeMap_Capturing.faceframebuffer_viewmatrixes[i]);
+				Sponza.Draw();
+			}*/
 
 
-		//Render SkyBox
-		Stencil_MainPass.Activate();
-		glUseProgram(SkyBox_Shader.ShaderProgramID);
-		glUniformMatrix4fv(SkyBox_Shader.GetUniform("view_matrix"), 1, GL_FALSE, value_ptr(mat4(mat3(main_Camera->view_matrix))));
-		glUniformMatrix4fv(SkyBox_Shader.GetUniform("projection_matrix"), 1, GL_FALSE, value_ptr(global_projection_matrix));
-		glBindVertexArray(SkyBox_VAO);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, SkyBox_Texture.id);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+			//Normal Scene Pass
+			glBindFramebuffer(GL_FRAMEBUFFER, MainRenderer_FB.id);
 
-		//Render MainScene Geometry Pass
-		glUseProgram(Surface_Shader_Main.ShaderProgramID);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, SkyBox_Texture.id);
+			//Set Background
+			// ------
+			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 
-		Nanosuit.set_Shader(Surface_Shader_NormalMap);
-		Nanosuit.set_ProjMatrix(global_projection_matrix);
-		Nanosuit.set_ViewMatrix(main_Camera->view_matrix);
-		Nanosuit.Draw();
+			//Render SkyBox
+			Stencil_MainPass.Activate();
+			glUseProgram(SkyBox_Shader.ShaderProgramID);
+			glUniformMatrix4fv(SkyBox_Shader.GetUniform("view_matrix"), 1, GL_FALSE, value_ptr(mat4(mat3(main_Camera->view_matrix))));
+			glUniformMatrix4fv(SkyBox_Shader.GetUniform("projection_matrix"), 1, GL_FALSE, value_ptr(global_projection_matrix));
+			glBindVertexArray(SkyBox_VAO);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, SkyBox_Texture.id);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		//Normal Scene Rendering is Finished
-		bool renderloop_wireframe = false;
-		wireframe_Transition(renderloop_wireframe);
+			//Render MainScene Geometry Pass
+			glUseProgram(Surface_Shader_Main.ShaderProgramID);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, SkyBox_Texture.id);
 
-		light_sphere0.Draw(global_projection_matrix, main_Camera->view_matrix);
-		Spot_Light.Draw(global_projection_matrix, main_Camera->view_matrix);
 
-		//Multi-Sample AA Scene Texture to Normal 
-		glBindFramebuffer(GL_READ_FRAMEBUFFER, MainRenderer_FB.id);
-		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, Alternative_FB.id);
-		glBlitFramebuffer(0, 0, MainTarget_Color.Properties.width, MainTarget_Color.Properties.height, 0, 0, Alternative_Color.Properties.width, Alternative_Color.Properties.height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
-		glBlitFramebuffer(0, 0, MainTarget_Depth.Properties.width, MainTarget_Depth.Properties.height, 0, 0, Alternative_Depth.Properties.width, Alternative_Depth.Properties.height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
-		
-		//Post Proccess Default
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glClearColor(1, 0, 0, 1);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glUseProgram(Post_Proccess_Default.ShaderProgramID);
-		Post_Proccess_Default.set_Texture(0, "RenderResult", Alternative_Color.id);
-		Stencil_PostProcess.Activate();
-		glBindVertexArray(PostProcessQuad_VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		
-		/*
-		//Post Process Features;
-		//Gamma Correction
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glClearColor(1, 0, 0, 1);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glUseProgram(PostProcess_Shader.ShaderProgramID);
-		PostProcess_Shader.set_Texture(0, "RenderResult", Alternative_FB.Color_ID);
-		set_StencilTest(Stencil_PostProcess);
-		glBindVertexArray(PostProcessQuad_VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		*/
+			Nanosuit.set_Shader(Surface_Shader_NormalMap);
+			Nanosuit.set_ProjMatrix(global_projection_matrix);
+			Nanosuit.set_ViewMatrix(main_Camera->view_matrix);
+			Nanosuit.Draw();
 
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-		i++;
+			//Normal Scene Rendering is Finished
+			bool renderloop_wireframe = false;
+			wireframe_Transition(renderloop_wireframe);
+
+			light_sphere0.Draw(global_projection_matrix, main_Camera->view_matrix);
+
+			//Multi-Sample AA Scene Texture to Normal 
+			glBindFramebuffer(GL_READ_FRAMEBUFFER, MainRenderer_FB.id);
+			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, Alternative_FB.id);
+			glBlitFramebuffer(0, 0, MainTarget_Color.Properties.width, MainTarget_Color.Properties.height, 0, 0, Alternative_Color.Properties.width, Alternative_Color.Properties.height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+			glBlitFramebuffer(0, 0, MainTarget_Depth.Properties.width, MainTarget_Depth.Properties.height, 0, 0, Alternative_Depth.Properties.width, Alternative_Depth.Properties.height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+
+			//Post Proccess Default
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			glClearColor(1, 0, 0, 1);
+			glClear(GL_COLOR_BUFFER_BIT);
+			glUseProgram(Post_Proccess_Default.ShaderProgramID);
+			Post_Proccess_Default.set_Texture(0, "RenderResult", Alternative_Color.id);
+			Stencil_PostProcess.Activate();
+			glBindVertexArray(PostProcessQuad_VAO);
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+			glBindTexture(GL_TEXTURE_2D, 0);
+
+			/*
+			//Post Process Features;
+			//Gamma Correction
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			glClearColor(1, 0, 0, 1);
+			glClear(GL_COLOR_BUFFER_BIT);
+			glUseProgram(PostProcess_Shader.ShaderProgramID);
+			PostProcess_Shader.set_Texture(0, "RenderResult", Alternative_FB.Color_ID);
+			set_StencilTest(Stencil_PostProcess);
+			glBindVertexArray(PostProcessQuad_VAO);
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+			glBindTexture(GL_TEXTURE_2D, 0);
+			*/
+
+			glfwSwapBuffers(window);
+			glfwPollEvents();
+			i++;
+		}
+		else {
+			glfwPollEvents();
+			Sleep(16.66);
+		}
 	}
 
 	glfwTerminate();

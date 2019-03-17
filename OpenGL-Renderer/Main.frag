@@ -108,7 +108,7 @@ void main() {
 		vec3 normal = normalize(VertexNormal);
 	//Final Fragment Color
 	//Fragment_Color = vec4(normal, 1.0f);
-	Fragment_Color = vec4(normal, 1.0f);
+	Fragment_Color = vec4(Lighting_Calculations.rgb * objectColor.rgb, 1.0f);
 	//Fragment_Color = vec4(depth);
 
 }

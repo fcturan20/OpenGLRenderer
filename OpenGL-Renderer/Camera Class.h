@@ -8,7 +8,7 @@ public:
 	void camera_Movement();
 	void camera_Direction();
 	void camera_Position();
-	float cameraSpeed_Multiplier = 150.0f;
+	float cameraSpeed_Multiplier = 6.0f;
 	float cameraSpeed_Base = 1.0f;
 	void set_Speed(float speed);
 

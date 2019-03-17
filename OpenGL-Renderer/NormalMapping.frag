@@ -108,7 +108,7 @@ void main() {
 	float ratio = 1.0f/1.52f;
 	vec3 refractDirection = refract(eyeToFragment, normalize(VertexNormal), ratio);
 	
-	Fragment_Color = vec4(Lighting_Calculations);
+	Fragment_Color = vec4(Lighting_Calculations * objectColor);
 }
 
 
@@ -162,7 +162,7 @@ vec3 Calculate_Point_Lights(){
 		//float Attenuation = 1; -> Means Attenuation off for test purposes
 
 		//Result per Light
-		result += (Ambient_Light + Diffuse_Light + Specular_Light) * Attenuation;
+		result += (Ambient_Light + Diffuse_Light + Specular_Light) * 1;
 	}
 	return result;
 }

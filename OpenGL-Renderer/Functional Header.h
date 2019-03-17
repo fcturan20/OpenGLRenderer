@@ -13,6 +13,7 @@ bool wireframe = false, temporary_wireframe = false;
 float frustum_near = 0.1f, frustum_far = 10000.0f;
 float Delta_Time = 1;
 float progress = 0;
+bool is_Window_Active = true;
 
 //Global CubeMap Variables 
 int CM_Width = int(240), CM_Height = int(240);
@@ -146,6 +147,17 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
 }
 
+void window_focus_callback(GLFWwindow* window, int focused) {
+	if (focused) {
+		cout << "Window is active\n";
+		is_Window_Active = true;
+	}
+	else {
+		cout << "Window is inactive\n";
+		is_Window_Active = false;
+	}
+}
+
 void mouse_position_callback(GLFWwindow* window, double xpos, double ypos) {
 	if (firstMouse) {
 		mouse_last_x = xpos;
@@ -173,7 +185,7 @@ void mouse_position_callback(GLFWwindow* window, double xpos, double ypos) {
 
 
 void create_Window() {
-	//GLFW'yi baï¿½latma kodlarï¿½
+	//GLFW'yi baþlatma kodlarý
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -193,6 +205,7 @@ void create_Window() {
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	glfwSetMouseButtonCallback(window, mouse_button_callback);
 	glfwSetCursorPosCallback(window, mouse_position_callback);
+	glfwSetWindowFocusCallback(window, window_focus_callback);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
 	//Check and Report if GLAD fails
