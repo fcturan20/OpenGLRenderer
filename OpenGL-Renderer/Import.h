@@ -111,9 +111,9 @@ Mesh Import::createMesh(aiMesh *mesh) {
 		vertex.Tangent = Tangent;
 
 		vec3 Bitangent;
-		Bitangent.x = mesh->mTangents[i].x;
-		Bitangent.y = mesh->mTangents[i].y;
-		Bitangent.z = mesh->mTangents[i].z;
+		Bitangent.x = mesh->mBitangents[i].x;
+		Bitangent.y = mesh->mBitangents[i].y;
+		Bitangent.z = mesh->mBitangents[i].z;
 		vertex.Bitangent = Bitangent;
 
 
